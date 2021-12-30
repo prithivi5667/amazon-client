@@ -2,6 +2,7 @@ import { deliverOrder, detailsOrder, payOrder } from 'actions/orderActions';
 import Axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
+import { axiosInstance } from 'config';
 import React, { useEffect, useState } from 'react';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +35,7 @@ export default function OrderScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data } = await Axios.get('/api/config/paypal');
+      const { data } = await axiosInstance.get('/api/config/paypal');
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;

@@ -6,6 +6,7 @@ import {
 } from '@react-google-maps/api';
 import Axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
+import { axiosInstance } from 'config';
 import { USER_ADDRESS_MAP_CONFIRM } from 'constants/userConstants';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -24,7 +25,7 @@ export default function MapScreen(props) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await Axios('/api/config/google');
+      const { data } = await axiosInstance('/api/config/google');
       setGoogleApiKey(data);
       getUserCurrentLocation();
     };
